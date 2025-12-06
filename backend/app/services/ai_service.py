@@ -4,7 +4,7 @@ AI Service for Chatbot - Integrates with OpenAI or other AI providers
 from app.core.config import settings
 from typing import Optional, Dict, Any, List
 from langchain_openai import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
