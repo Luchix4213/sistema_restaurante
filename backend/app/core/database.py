@@ -18,8 +18,14 @@ except ImportError:
 
 # SQLAlchemy setup for PostgreSQL
 if settings.DATABASE_TYPE == "postgresql":
+    # Fix for Render/Heroku: Replace postgres:// with postgresql://
+    # SQLAlchemy 1.4+ removed support for postgres://
+    db_url = settings.DATABASE_URL
+    if db_url and db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+
     engine = create_engine(
-        settings.DATABASE_URL,
+        db_url,
         pool_pre_ping=True,
         echo=settings.ENVIRONMENT == "development"
     )
